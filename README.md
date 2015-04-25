@@ -1,3 +1,9 @@
-```npm install```
-```bower install```
-```node server.js```
+```
+npm install
+```
+```
+bower install
+```
+```
+node server.js
+```
