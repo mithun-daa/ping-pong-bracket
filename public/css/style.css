@@ -5,10 +5,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: 3552px;
+    /*height: 3552px;*/
 }
 .game {
-    height: 215px;
+    height: 133px;
     /*margin-bottom: 20px;*/
 }
 
