@@ -1,3 +1,12 @@
+.row-flex {
+    display: flex;
+}
+.row-flex > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 3552px;
+}
 .game {
     height: 215px;
     /*margin-bottom: 20px;*/
@@ -8,9 +17,3 @@
     height: 50px;
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    height: 3552px;
-}
