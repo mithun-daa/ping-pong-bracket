@@ -44,11 +44,20 @@
 	color: #777B7F;
 }
 
-.game-winner {
+.winner {
   border-color: #ccc;
   border-color: rgba(121, 236, 82, 0.8);;
   outline: 0;
   outline: thin dotted \9;
   -webkit-box-shadow: 0 0 8px rgba(82, 236, 101, 0.6);
   box-shadow: 0 0 8px rgba(82, 236, 101, 0.6);
+}
+
+.loser {
+  border-color: #ccc;
+  border-color: rgba(236, 82, 82, 0.8);
+  outline: 0;
+  outline: thin dotted \9;
+  -webkit-box-shadow: 0 0 8px rgba(236, 82, 82, 0.6);
+  box-shadow: 0 0 8px rgba(236, 82, 82, 0.6);
 }
