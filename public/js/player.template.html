@@ -1,11 +1,10 @@
-<div class="media">
+<div class="media player">
     <div class="media-left">
         <a>
             <img class="media-object img-circle" ng-src="{{player.imageUrl}}" alt="{{player.name}}">
         </a>
     </div>
-    <div class="media-body">
-        <h6 class="media-heading">{{player.name}}</h6>
-        {{player.department}}
+    <div class="media-body" style="vertical-align: middle">
+        <span class="media-heading">{{player.name}} <small class="dept">{{player.department}}</small></span>
     </div>
 </div>

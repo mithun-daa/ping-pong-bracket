@@ -4,20 +4,29 @@ app.controller('MainCtrl', function (data) {
     var vm = this;
     vm.departments = {};
     var allUsers = data.getUsers();
+    var maleCount = 0, femaleCount = 0;
     for(var i = 0; i < allUsers.length; i++) {
+        if(allUsers[i].sex === 'M') {
+            maleCount++;
+        } else {
+            femaleCount++;
+        }
+
         if(vm.departments[allUsers[i].department] === undefined) {
             vm.departments[allUsers[i].department] = 1;
         } else {
             vm.departments[allUsers[i].department]++;
         }
     }
-    console.log(vm.departments);
+    vm.maleCount = maleCount;
+    vm.femaleCount = femaleCount;
 });
 
-app.service('data', function ($window) {
+app.service('data', function ($window, $http) {
     var service = {
         getUsers: getUsers,
-        getGames: getGames
+        getGames: getGames,
+        saveWinner: saveWinner
     };
 
     return service;
@@ -29,9 +38,14 @@ app.service('data', function ($window) {
     function getGames() {
         return $window.data.allGames;
     }
+
+    function saveWinner(game) {
+        return $http.put('/games/' + game._id, game);
+            
+    };
 });
 
-app.directive('game', function (data) {
+app.directive('game', function (data, $location) {
     var allGames = data.getGames();
     var allUsers = data.getUsers();
 
@@ -41,7 +55,13 @@ app.directive('game', function (data) {
         replace: true,
         scope: true,
         link: function (scope, elem, attr) {
+            var params = $location.search();
             var gameId = attr.gameId;
+
+            if(params && params.isAdmin) {
+                scope.isAdmin = true;
+            }
+
             for(var i =0; i< allGames.length; i++) {
                 if(allGames[i]._id === gameId) {
                     scope.game = allGames[i];
@@ -64,6 +84,21 @@ app.directive('game', function (data) {
                 }
 
             }
+
+            scope.saveWinner = function(userId) {
+                var parentParts;
+                scope.game.winner = userId;
+                data.saveWinner(scope.game)
+                    .then(function(response) {
+                        // parentParts = game.parentId.split('-');
+                        // var parentGame = allGames[parentParts[0]];
+                        // if(parentParts[1] === '1') {
+                        //     parentGame.player1 = userId;
+                        // } else {
+                        //     parentGame.player2 = userId;
+                        // }
+                    });
+            };
         }
         
     }
@@ -78,3 +113,40 @@ app.directive('player', function () {
         templateUrl: 'js/player.template.html'
     }
 })
+
+
+jsPlumb.ready(function() {
+    var j = jsPlumb.getInstance({
+        Container:"container"
+     
+    });
+
+    j.importDefaults({
+        PaintStyle : {
+        lineWidth:3,
+        strokeStyle: 'rgba(241, 158, 88, 0.5)'
+        },
+        Connector:[ "Flowchart"],
+        Anchors:["Right", "Left"],
+        Endpoints : [ [ "Dot", { radius:3 } ], [ "Dot", { radius:3 } ] ],
+        EndpointStyles : [{ fillStyle:"#F58020" }, { fillStyle:"#F58020" }]
+    });
+
+    j.connect({ source:'game1', target:'game9' });
+    j.connect({ source:'game2', target:'game10' });
+    j.connect({ source:'game3', target:'game11' });
+    j.connect({ source:'game9', target:'game12' });
+    j.connect({ source:'game4', target:'game12' });
+    j.connect({ source:'game5', target:'game13' });
+    j.connect({ source:'game6', target:'game13' });
+    j.connect({ source:'game10', target:'game14' });
+    j.connect({ source:'game7', target:'game14' });
+    j.connect({ source:'game11', target:'game15' });
+    j.connect({ source:'game8', target:'game15' });
+    j.connect({ source:'game12', target:'game16' });
+    j.connect({ source:'game13', target:'game16' });
+    j.connect({ source:'game14', target:'game17' });
+    j.connect({ source:'game15', target:'game17' });
+    j.connect({ source:'game16', target:'game18' });
+    j.connect({ source:'game17', target:'game18' });
+});

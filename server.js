@@ -64,6 +64,28 @@ app.route('/games').post(function (req, res) {
     });
 });
 
+app.route('/games/:gameId').put(function (req, res) {
+    var game = req.body;
+    gameDb.update({_id: game._id}, {$set: {winner: game.winner}}, function(err) {
+        if(err) res.status(500).json({message: 'Error while updating Game'});
+
+        //Update the parent with the winner
+        var parentParts = game.parentId.split('-');
+        var set;
+        
+        if(parentParts[1] === '1') {
+            set = {$set: {player1: game.winner}};
+        } else {
+            set = {$set: {player2: game.winner}};
+        }
+        console.log(parentParts);
+        gameDb.update({_id: parentParts[0]}, set, function(parentErr) {
+            if(parentErr) res.status(500).json({message: 'Error while updating parent'});
+
+            res.status(200);
+        });
+    });
+});
 
 app.route('/').get(function (req, res) {
     var allgames, allusers;

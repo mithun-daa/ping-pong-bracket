@@ -1,8 +1,14 @@
 
 <div class="game">
     <div class="">
-        <player player-info="player1"></player>
-        <h6 class="">Game {{game._id}} - {{game.on}}</h6>
-        <player player-info="player2"></player>
+    	<div ng-class="{'game-winner' : game.winner === player1._id}">	
+    		<player player-info="player1"></player>	
+    	</div>
+    	<button type="button" class="pull-right" ng-click="saveWinner(player1._id)" ng-if="isAdmin">x</button>
+        <h6 class="text-center" style="color: lightslategray"><i class="fa fa-calendar"></i> {{game.on}}</h6>
+        <div ng-class="{'game-winner' : game.winner === player2._id}">
+        	<player player-info="player2"></player>
+        </div>
+        <button type="button" class="pull-right" ng-click="saveWinner(player2._id)" ng-if="isAdmin">x</button>
     </div>
 </div>
