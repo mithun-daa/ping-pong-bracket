@@ -61,3 +61,12 @@
   -webkit-box-shadow: 0 0 8px rgba(236, 82, 82, 0.6);
   box-shadow: 0 0 8px rgba(236, 82, 82, 0.6);
 }
+
+.round {
+    width: 20%;
+    padding: 20px;
+}
+
+.panel-heading {
+    font-size: 12px;
+}

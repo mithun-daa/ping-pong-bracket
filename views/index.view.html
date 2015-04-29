@@ -23,32 +23,29 @@
         </nav>
         
     <div class="row" style="margin-bottom: 20px;">
+        <div class="col-lg-1 panel panel-success" ng-repeat="(department, count) in ctrl.departments" style="padding:0;margin:5px">
+            <div class="panel-heading text-center" ng-bind="department"></div>
+            <div class="panel-body text-center"><i class="fa fa-trophy" ng-bind=""></i></div>
+        </div>
         <div class="col-sm-1"></div>
-        <div class="col-sm-1 panel panel-warning"style="padding:0;margin:5px">
+        <div class="col-lg-1 panel panel-warning"style="padding:0;margin:5px">
             <div class="panel-heading text-center"><i class="fa fa-female"></i></div>
             <div class="panel-body text-center" ng-bind="ctrl.femaleCount" style=""></div>
         </div>
-        
-        <div class="col-sm-1 panel panel-success" ng-repeat="(department, count) in ctrl.departments" style="padding:0;margin:5px">
-            <div class="panel-heading text-center" ng-bind="department"></div>
-            <div class="panel-body text-center" ng-bind="count" style=""></div>
-        </div>
-        <div class="col-sm-1 panel panel-warning"style="padding:0;margin:5px">
+        <div class="col-lg-1 panel panel-warning"style="padding:0;margin:5px">
             <div class="panel-heading text-center"><i class="fa fa-male"></i></div>
             <div class="panel-body text-center" ng-bind="ctrl.maleCount" style=""></div>
         </div>
-        <div class="col-sm-1"></div>
     </div>
     <div class="row-flex" id="container" style="position: relative">
-        <div class="col-lg-1"></div>
         <!--Round 1-->
-        <div class="col-lg-2">
+        <div class="round">
             <game class="game well" game-id="1" id="game1"></game>
             <game class="game well" game-id="2" id="game2"></game>
             <game class="game well" game-id="3" id="game3"></game>
         </div>
         <!--Round 2-->
-        <div class="col-lg-2">
+        <div class="round">
             <game class="game well" game-id="9" id="game9"></game>
             <game class="game well" game-id="4" id="game4"></game>
             <game class="game well" game-id="5" id="game5"></game>
@@ -59,22 +56,21 @@
             <game class="game well" game-id="8" id="game8"></game>
         </div>
         <!--Round 3-->
-        <div class="col-lg-2">
+        <div class="round">
             <game class="game well" game-id="12" id="game12"></game>
             <game class="game well" game-id="13" id="game13"></game>
             <game class="game well" game-id="14" id="game14"></game>
             <game class="game well" game-id="15" id="game15"></game>
         </div>
         <!--Round 4-->
-        <div class="col-lg-2">
+        <div class="round">
             <game class="game well" game-id="16" id="game16"></game>
             <game class="game well" game-id="17" id="game17"></game>
         </div>
         <!--Round 5-->
-        <div class="col-lg-2">
+        <div class="round">
             <game class="game well" game-id="18" id="game18"></game>
         </div>
-        <div class="col-lg-1"></div>
     </div>
     </div>
     <!--Embed data-->

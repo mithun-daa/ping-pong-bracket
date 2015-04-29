@@ -1,7 +1,7 @@
 
 <div class="game">
     <div class="">
-    	<div ng-class="{'winner' : game.winner === player1._id, 'loser' : game.winner === player2._id}">	
+        <div ng-class="{'winner' : game.winner === player1._id, 'loser' : game.winner === player2._id}">
     		<player player-info="player1"></player>	
     	</div>
     	<button type="button" class="pull-right" ng-click="saveWinner(player1._id)" ng-if="isAdmin">x</button>
