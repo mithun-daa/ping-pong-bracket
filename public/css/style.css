@@ -70,3 +70,12 @@
 .panel-heading {
     font-size: 12px;
 }
+
+.finals {
+    font-size: 64px;
+}
+
+.finals > i {
+    vertical-align: middle;
+}
+
