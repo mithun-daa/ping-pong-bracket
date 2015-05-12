@@ -4,6 +4,8 @@ app.controller('MainCtrl', function (data) {
     var vm = this;
     vm.departments = {};
     var allUsers = data.getUsers();
+    var allGames = data.getGames();
+    
     var maleCount = 0, femaleCount = 0;
     for(var i = 0; i < allUsers.length; i++) {
         if(allUsers[i].sex === 'M') {
@@ -13,15 +15,37 @@ app.controller('MainCtrl', function (data) {
         }
 
         if(vm.departments[allUsers[i].department] === undefined) {
-            vm.departments[allUsers[i].department] = 1;
+            vm.departments[allUsers[i].department] = { totalUsers: 1, remaining:  1};
         } else {
-            vm.departments[allUsers[i].department]++;
+            vm.departments[allUsers[i].department].totalUsers++;
+            vm.departments[allUsers[i].department].remaining++;
         }
     }
+    var dept;
+    for(var i=0; i < allGames.length; i++) {
+        if(allGames[i].winner.length > 0) {
+            if(allGames[i].winner === allGames[i].player1) {
+                dept = getDepartment(allGames[i].player2, allUsers);
+            } else {
+                dept = getDepartment(allGames[i].player1, allUsers);
+            }
+            
+            vm.departments[dept].remaining--;
+        }
+    }
+    
     vm.maleCount = maleCount;
     vm.femaleCount = femaleCount;
 });
 
+function getDepartment(player, allUsers) {
+    for(var i = 0; i < allUsers.length; i++) {
+        if(allUsers[i]._id === player) {
+            console.log(allUsers[i]);
+            return allUsers[i].department;
+        }
+    }
+}
 app.service('data', function ($window, $http) {
     var service = {
         getUsers: getUsers,
